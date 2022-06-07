@@ -1,9 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;
+static const unsigned int borderpx  = 0;
 static const unsigned int snap      = 32;
-static const int showbar            = 1;
+static const int showbar            = 0;
 static const int topbar             = 1;
 static const char *fonts[]          = { "Terminus:pixelsize=22" };
 static const char dmenufont[]       =   "Terminus:pixelsize=22";
