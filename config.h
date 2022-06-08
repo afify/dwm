@@ -22,11 +22,6 @@ static const char *colors[][3]      = {
 	/*                 fg          bg         border   */
 	[SchemeNorm]   = { col_ng1,    col_black, col_gray1 },
 	[SchemeSel]    = { col_gray3,  col_black, col_gray2 },
-	[SchemeRed]    = { col_red,    col_black, col_black },
-	[SchemeGreen]  = { col_green,  col_black, col_black },
-	[SchemeCyan]   = { col_cyan,   col_black, col_black },
-	[SchemeYellow] = { col_yellow, col_black, col_black },
-	[SchemeOrange] = { col_orange, col_black, col_black },
 };
 
 /* tagging */
