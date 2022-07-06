@@ -5,8 +5,8 @@ static const unsigned int borderpx  = 0;
 static const unsigned int snap      = 32;
 static const int showbar            = 0;
 static const int topbar             = 1;
-static const char *fonts[]          = { "DejaVu Sans Mono:pixelsize=18" };
-static const char dmenufont[]       =   "DejaVu Sans Mono:pixelsize=18";
+static const char *fonts[]          = { "Martian Mono Std Rg:pixelsize=16" };
+static const char dmenufont[]       =   "Martian Mono Std Rg:pixelsize=16";
 static const char col_black[]       = "#000000";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -25,7 +25,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "ﱘ", "", "", "" };
 
 static const Rule rules[] = {
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
@@ -50,81 +50,71 @@ static const Layout layouts[] = { { "", tile } };
 
 /* commands */
 static char dmenumon[2] = "0";
-static const char *bright_inc[]        = { "xbacklight", "-inc", "10", NULL };
-static const char *bright_max[]        = { "xbacklight", "-set", "100", NULL };
-static const char *bright_min[]        = { "xbacklight", "-set", "0", NULL };
 static const char *dmenucmd[]          = { "dmenu_run", "-m", dmenumon, NULL };
-static const char *redshift[]          = { "redshift", "-P", "-O", "3000", "-m", "randr", NULL };
-static const char *redshift_r[]        = { "redshift", "-x", "-m", "randr", NULL };
 static const char *htop[]              = { "st", "htop", NULL };
 static const char *neomutt[]           = { "st", "neomutt", NULL };
 static const char *termcmd[]           = { "st", NULL };
-static const char *toxic[]             = { "st", "toxic", NULL };
 static const char *sfm[]               = { "st", "sfm", NULL };
-static const char *bright_dec[]        = { SCRIPTS "x_dec", NULL};
+static const char *passmenu[]          = { SCRIPTS "pass_manager", NULL };
+static const char *record_screen[]     = { SCRIPTS "record_screen", NULL};
+
 static const char *call_bluetooth[]    = { SCRIPTS "bluetooth_call", NULL };
-static const char *connect_bluetooth[] = { SCRIPTS "bluetooth_connect", NULL };
+static const char *bluetooth_connect[] = { SCRIPTS "bluetooth_connect", NULL };
+
 static const char *connect_server[]    = { SCRIPTS "connect_server", NULL };
+
 static const char *mount_drive[]       = { SCRIPTS "mount_drives", NULL };
-static const char *mute[]              = { SCRIPTS "volume_control", "mute_t", NULL };
-static const char *next_song[]         = { SCRIPTS "play_music", "next", NULL  };
+static const char *unmount_drive[]     = { SCRIPTS "unmount_drives", NULL };
+
 static const char *notify_azan[]       = { SCRIPTS "notify_azan", NULL };
 static const char *notify_cpu[]        = { SCRIPTS "notify_cpu", NULL };
 static const char *notify_disks[]      = { SCRIPTS "notify_disks", NULL };
 static const char *notify_gpu[]        = { SCRIPTS "notify_gpu", NULL };
 static const char *notify_network[]    = { SCRIPTS "network", "notify", NULL };
-static const char *passmenu[]          = { SCRIPTS "pass_manager", NULL };
-static const char *play_music[]        = { SCRIPTS "play_music", "choose", NULL };
-static const char *play_pause[]        = { SCRIPTS "play_music", "play-pause", NULL };
-static const char *prev_song[]         = { SCRIPTS "play_music", "previous", NULL  };
-static const char *record_screen[]     = { SCRIPTS "record_screen", NULL};
-static const char *run_my_scripts[]    = { SCRIPTS "list_scripts", NULL };
-static const char *search[]            = { SCRIPTS "search", NULL };
-static const char *surf_homepage[]     = { SCRIPTS "surf_homepage", NULL };
-static const char *unmount_drive[]     = { SCRIPTS "unmount_drives", NULL };
-static const char *update[]            = { SCRIPTS "update", NULL };
+
+static const char *mute[]              = { SCRIPTS "volume_control", "mute_t", NULL };
 static const char *volume_down[]       = { SCRIPTS "volume_control", "dec", NULL };
 static const char *volume_up[]         = { SCRIPTS "volume_control", "inc", NULL };
 
+static const char *play_music[]        = { SCRIPTS "play_music", "start", NULL };
+static const char *play_pause[]        = { SCRIPTS "play_music", "play-pause", NULL };
+static const char *next_song[]         = { SCRIPTS "play_music", "next", NULL  };
+static const char *prev_song[]         = { SCRIPTS "play_music", "previous", NULL  };
+
 static Key keys[] = {
-	{ ShiftMask,                    XK_F2,     spawn,          {.v = bright_max} },
-	{ ShiftMask,                    XK_F1,     spawn,          {.v = bright_min} },
-	{ MODKEY|ControlMask|Mod4Mask,  XK_b,      spawn,          {.v = call_bluetooth } },
-	{ MODKEY|Mod4Mask,              XK_b,      spawn,          {.v = connect_bluetooth } },
-	{ MODKEY|Mod4Mask,              XK_s,      spawn,          {.v = connect_server} },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|Mod4Mask,              XK_h,      spawn,          {.v = htop } },
-	{ MODKEY|Mod4Mask,              XK_m,      spawn,          {.v = mount_drive } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = neomutt} },
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_v,      spawn,          {.v = sfm } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = passmenu} },
+	{ MODKEY|ControlMask|Mod4Mask,  XK_o,      spawn,          {.v = record_screen } },
+
+	{ MODKEY|ControlMask|Mod4Mask,  XK_b,      spawn,          {.v = call_bluetooth } },
+	{ MODKEY|Mod4Mask,              XK_b,      spawn,          {.v = bluetooth_connect } },
+
+	{ MODKEY|Mod4Mask,              XK_s,      spawn,          {.v = connect_server} },
+
+	{ MODKEY|Mod4Mask,              XK_m,      spawn,          {.v = mount_drive } },
+	{ MODKEY|Mod4Mask,              XK_u,      spawn,          {.v = unmount_drive } },
+
 	{ MODKEY|Mod4Mask,              XK_a,      spawn,          {.v = notify_azan} },
 	{ MODKEY|Mod4Mask,              XK_c,      spawn,          {.v = notify_cpu} },
 	{ MODKEY|Mod4Mask,              XK_d,      spawn,          {.v = notify_disks} },
 	{ MODKEY|Mod4Mask,              XK_g,      spawn,          {.v = notify_gpu} },
 	{ MODKEY|Mod4Mask,              XK_n,      spawn,          {.v = notify_network} },
-	{ MODKEY,                       XK_w,      spawn,          {.v = passmenu} },
-	{ MODKEY|Mod4Mask,              XK_p,      spawn,          {.v = play_music } },
-	{ MODKEY|ControlMask|Mod4Mask,  XK_o,      spawn,          {.v = record_screen } },
-	{ MODKEY|Mod4Mask,              XK_r,      spawn,          {.v = redshift} },
-	{ MODKEY|ShiftMask|Mod4Mask,    XK_r,      spawn,          {.v = redshift_r} },
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = run_my_scripts} },
-	{ MODKEY,                       XK_s,      spawn,          {.v = search} },
-	{ MODKEY,                       XK_r,      spawn,          {.v = surf_homepage} },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_t,      spawn,          {.v = toxic } },
-	{ MODKEY|ShiftMask|Mod4Mask,    XK_m,      spawn,          {.v = unmount_drive } },
-	{ MODKEY|Mod4Mask,              XK_u,      spawn,          {.v = update} },
-	{ MODKEY,                       XK_v,      spawn,          {.v = sfm } },
-	{ MODKEY|Mod4Mask,              XK_l,      spawn,          SHCMD("pkill gpg-agent; slock& sleep 1 && xset dpms force off") },
-	{ MODKEY|Mod4Mask,              XK_z,      spawn,          SHCMD("pkill gpg-agent; slock& doas zzz") },
-	{ MODKEY|Mod4Mask,              XK_x,      spawn,          SHCMD("pkill xbanish;xbanish -m ne&") },
-	{ 0,                            XK_F1,     spawn,          {.v = bright_dec} },
-	{ 0,                            XK_F2,     spawn,          {.v = bright_inc} },
+
 	{ 0,                            XK_F10,    spawn,          {.v = mute} },
-	{ 0,                            XK_F9,     spawn,          {.v = next_song} },
+	{ 0,                            XK_F12,    spawn,          {.v = volume_down} },
+	{ 0,                            XK_F11,    spawn,          {.v = volume_up} },
+
+	{ MODKEY|Mod4Mask,              XK_p,      spawn,          {.v = play_music } },
 	{ 0,                            XK_F7,     spawn,          {.v = play_pause } },
+	{ 0,                            XK_F9,     spawn,          {.v = next_song} },
 	{ 0,                            XK_F8,     spawn,          {.v = prev_song} },
-	{ 0,                            XK_F11,    spawn,          {.v = volume_down} },
-	{ 0,                            XK_F12,    spawn,          {.v = volume_up} },
+
+	{ MODKEY|Mod4Mask,              XK_l,      spawn,          SHCMD("pkill gpg-agent; slock") },
+	{ MODKEY|Mod4Mask,              XK_e,      spawn,          SHCMD("mbsync -a && notify-send 'Email' 'mbsync -a'") },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
