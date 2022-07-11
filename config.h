@@ -40,11 +40,15 @@ static const Layout layouts[] = { { "", tile } };
 
 /* key definitions */
 #define MODKEY Mod1Mask
+#define ALT Mod1Mask
+#define META Mod4Mask
+#define CTL ControlMask
+#define SHIFT ShiftMask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ ALT,           KEY,      view,           {.ui = 1 << TAG} }, \
+	{ ALT|CTL,       KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ ALT|SHIFT,     KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ ALT|CTL|SHIFT, KEY,      toggletag,      {.ui = 1 << TAG} },
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 #define SCRIPTS "/home/hassan/.scripts/"
 
@@ -82,79 +86,79 @@ static const char *next_song[]         = { SCRIPTS "play_music", "next", NULL  }
 static const char *prev_song[]         = { SCRIPTS "play_music", "previous", NULL  };
 
 static Key keys[] = {
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|Mod4Mask,              XK_h,      spawn,          {.v = htop } },
-	{ MODKEY,                       XK_m,      spawn,          {.v = neomutt} },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_v,      spawn,          {.v = sfm } },
-	{ MODKEY,                       XK_w,      spawn,          {.v = passmenu} },
-	{ MODKEY|ControlMask|Mod4Mask,  XK_o,      spawn,          {.v = record_screen } },
+	{ ALT,           XK_p,      spawn,          {.v = dmenucmd } },
 
-	{ MODKEY|ControlMask|Mod4Mask,  XK_b,      spawn,          {.v = call_bluetooth } },
-	{ MODKEY|Mod4Mask,              XK_b,      spawn,          {.v = bluetooth_connect } },
+	{ ALT,           XK_r,      spawn,          {.v = htop } },
+	{ ALT,           XK_m,      spawn,          {.v = neomutt} },
+	{ ALT,           XK_Return, spawn,          {.v = termcmd } },
+	{ ALT,           XK_v,      spawn,          {.v = sfm } },
+	{ ALT,           XK_w,      spawn,          {.v = passmenu} },
+	{ ALT,           XK_o,      spawn,          {.v = record_screen } },
 
-	{ MODKEY|Mod4Mask,              XK_s,      spawn,          {.v = connect_server} },
+	{ ALT|META,      XK_g,      spawn,          {.v = call_bluetooth } },
+	{ ALT|SHIFT,     XK_g,      spawn,          {.v = bluetooth_connect } },
 
-	{ MODKEY|Mod4Mask,              XK_m,      spawn,          {.v = mount_drive } },
-	{ MODKEY|Mod4Mask,              XK_u,      spawn,          {.v = unmount_drive } },
+	{ ALT,           XK_g,      spawn,          {.v = connect_server} },
 
-	{ MODKEY|Mod4Mask,              XK_a,      spawn,          {.v = notify_azan} },
-	{ MODKEY|Mod4Mask,              XK_c,      spawn,          {.v = notify_cpu} },
-	{ MODKEY|Mod4Mask,              XK_d,      spawn,          {.v = notify_disks} },
-	{ MODKEY|Mod4Mask,              XK_g,      spawn,          {.v = notify_gpu} },
-	{ MODKEY|Mod4Mask,              XK_n,      spawn,          {.v = notify_network} },
+	{ ALT,           XK_t,      spawn,          {.v = mount_drive } },
+	{ ALT,           XK_s,      spawn,          {.v = unmount_drive } },
 
-	{ 0,                            XK_F10,    spawn,          {.v = mute} },
-	{ 0,                            XK_F12,    spawn,          {.v = volume_down} },
-	{ 0,                            XK_F11,    spawn,          {.v = volume_up} },
+	{ ALT|META,      XK_a,      spawn,          {.v = notify_azan} },
+	{ ALT|META,      XK_c,      spawn,          {.v = notify_cpu} },
+	{ ALT|META,      XK_d,      spawn,          {.v = notify_disks} },
+	{ ALT|META,      XK_x,      spawn,          {.v = notify_gpu} },
+	{ ALT|META,      XK_z,      spawn,          {.v = notify_network} },
 
-	{ MODKEY|Mod4Mask,              XK_p,      spawn,          {.v = play_music } },
-	{ 0,                            XK_F7,     spawn,          {.v = play_pause } },
-	{ 0,                            XK_F9,     spawn,          {.v = next_song} },
-	{ 0,                            XK_F8,     spawn,          {.v = prev_song} },
+	{ ALT,           XK_F10,    spawn,          {.v = mute} },
+	{ ALT,           XK_F12,    spawn,          {.v = volume_down} },
+	{ ALT,           XK_F11,    spawn,          {.v = volume_up} },
 
-	{ MODKEY|Mod4Mask,              XK_l,      spawn,          SHCMD("pkill gpg-agent; slock") },
-	{ MODKEY|Mod4Mask,              XK_e,      spawn,          SHCMD("mbsync -a && notify-send 'Email' 'mbsync -a'") },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.01} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.01} },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	//{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-	//{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	TAGKEYS(                        XK_1,                       0)
-	TAGKEYS(                        XK_2,                       1)
-	TAGKEYS(                        XK_3,                       2)
-	TAGKEYS(                        XK_4,                       3)
-	TAGKEYS(                        XK_5,                       4)
-	TAGKEYS(                        XK_6,                       5)
-	TAGKEYS(                        XK_7,                       6)
-	TAGKEYS(                        XK_8,                       7)
-	TAGKEYS(                        XK_9,                       8)
+	{ ALT|META,      XK_p,      spawn,          {.v = play_music } },
+	{ ALT,           XK_F7,     spawn,          {.v = play_pause } },
+	{ ALT,           XK_F9,     spawn,          {.v = next_song} },
+	{ ALT,           XK_F8,     spawn,          {.v = prev_song} },
+
+	{ ALT|META,      XK_l,      spawn,          SHCMD("pkill gpg-agent; slock") },
+	{ ALT|META,      XK_e,      spawn,          SHCMD("notify-send 'Email' 'mbsync -a' && mbsync -a") },
+	{ ALT,           XK_Tab,    view,           {0} },
+	{ ALT,           XK_b,      togglebar,      {0} },
+	{ ALT,           XK_q,      killclient,     {0} },
+	{ ALT,           XK_j,      focusstack,     {.i = +1 } },
+	{ ALT,           XK_k,      focusstack,     {.i = -1 } },
+	{ ALT,           XK_h,      setmfact,       {.f = -0.01} },
+	{ ALT,           XK_l,      setmfact,       {.f = +0.01} },
+	{ ALT,           XK_comma,  focusmon,       {.i = -1 } },
+	{ ALT,           XK_period, focusmon,       {.i = +1 } },
+	{ ALT|SHIFT,     XK_period, tagmon,         {.i = +1 } },
+	{ ALT|SHIFT,     XK_comma,  tagmon,         {.i = -1 } },
+	//{ ALT|SHIFT,             XK_j,      movestack,      {.i = +1 } },
+	//{ ALT|SHIFT,             XK_k,      movestack,      {.i = -1 } },
+	{ ALT|SHIFT,     XK_Return, zoom,           {0} },
+	{ ALT|SHIFT,     XK_q,      quit,           {0} },
+	TAGKEYS(         XK_1,                       0)
+	TAGKEYS(         XK_2,                       1)
+	TAGKEYS(         XK_3,                       2)
+	TAGKEYS(         XK_4,                       3)
+	TAGKEYS(         XK_5,                       4)
+	TAGKEYS(         XK_6,                       5)
+	TAGKEYS(         XK_7,                       6)
+	TAGKEYS(         XK_8,                       7)
+	TAGKEYS(         XK_9,                       8)
 };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
-	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	/* click         event mask button   function        argument */
+	{ ClkLtSymbol,   0,         Button1, setlayout,      {0} },
+	{ ClkLtSymbol,   0,         Button3, setlayout,      {.v = &layouts[2]} },
+	{ ClkWinTitle,   0,         Button2, zoom,           {0} },
+	{ ClkStatusText, 0,         Button2, spawn,          {.v = termcmd } },
+	{ ClkClientWin,  ALT,       Button1, movemouse,      {0} },
+	{ ClkClientWin,  ALT,       Button2, togglefloating, {0} },
+	{ ClkClientWin,  ALT,       Button3, resizemouse,    {0} },
+	{ ClkTagBar,     0,         Button1, view,           {0} },
+	{ ClkTagBar,     0,         Button3, toggleview,     {0} },
+	{ ClkTagBar,     ALT,       Button1, tag,            {0} },
+	{ ClkTagBar,     ALT,       Button3, toggletag,      {0} },
 };
-
