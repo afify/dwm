@@ -64,6 +64,7 @@ static const char *record_screen[]     = { SCRIPTS "record_screen", NULL};
 
 static const char *call_bluetooth[]    = { SCRIPTS "bluetooth_call", NULL };
 static const char *bluetooth_connect[] = { SCRIPTS "bluetooth_connect", NULL };
+static const char *rfkill[]            = { SCRIPTS "rfkill", NULL };
 
 static const char *connect_server[]    = { SCRIPTS "connect_server", NULL };
 
@@ -97,6 +98,7 @@ static Key keys[] = {
 
 	{ ALT|META,      XK_g,      spawn,          {.v = call_bluetooth } },
 	{ ALT|SHIFT,     XK_g,      spawn,          {.v = bluetooth_connect } },
+	{ ALT|META,      XK_k,      spawn,          {.v = rfkill } },
 
 	{ ALT,           XK_g,      spawn,          {.v = connect_server} },
 
