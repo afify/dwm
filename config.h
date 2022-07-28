@@ -25,7 +25,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "ﱘ", "", "", "" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
@@ -55,10 +55,12 @@ static const Layout layouts[] = { { "", tile } };
 /* commands */
 static char dmenumon[2] = "0";
 static const char *dmenucmd[]          = { "dmenu_run", "-m", dmenumon, NULL };
+static const char *surf[]              = { "surf", NULL };
 static const char *htop[]              = { "st", "htop", NULL };
 static const char *neomutt[]           = { "st", "neomutt", NULL };
 static const char *termcmd[]           = { "st", NULL };
 static const char *sfm[]               = { "st", "sfm", NULL };
+static const char *search[]            = { SCRIPTS "search", NULL };
 static const char *passmenu[]          = { SCRIPTS "pass_manager", NULL };
 static const char *record_screen[]     = { SCRIPTS "record_screen", NULL};
 
@@ -95,6 +97,8 @@ static Key keys[] = {
 	{ ALT,           XK_v,      spawn,          {.v = sfm } },
 	{ ALT,           XK_w,      spawn,          {.v = passmenu} },
 	{ ALT,           XK_o,      spawn,          {.v = record_screen } },
+	{ ALT,           XK_f,      spawn,          {.v = surf } },
+	{ ALT,           XK_backslash,      spawn,          {.v = search } },
 
 	{ ALT|META,      XK_g,      spawn,          {.v = call_bluetooth } },
 	{ ALT|SHIFT,     XK_g,      spawn,          {.v = bluetooth_connect } },
