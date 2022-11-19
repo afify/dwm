@@ -45,22 +45,17 @@ static const Layout layouts[] = { { "", tile } };
 #define CTL ControlMask
 #define SHIFT ShiftMask
 #define TAGKEYS(KEY,TAG) \
-	{ ALT,           KEY,      view,           {.ui = 1 << TAG} }, \
-	{ ALT|CTL,       KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ ALT|SHIFT,     KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ ALT|CTL|SHIFT, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ META,           KEY,      view,           {.ui = 1 << TAG} }, \
+	{ META|CTL,       KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ META|SHIFT,     KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ META|CTL|SHIFT, KEY,      toggletag,      {.ui = 1 << TAG} },
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 #define SCRIPTS "/home/hassan/.scripts/"
 
 /* commands */
 static char dmenumon[2] = "0";
 static const char *dmenucmd[]          = { "dmenu_run", "-m", dmenumon, NULL };
-static const char *surf[]              = { "surf", NULL };
-static const char *htop[]              = { "st", "htop", NULL };
-static const char *neomutt[]           = { "st", "neomutt", NULL };
 static const char *termcmd[]           = { "st", NULL };
-static const char *sfm[]               = { "st", "sfm", NULL };
-static const char *search[]            = { SCRIPTS "search", NULL };
 static const char *passmenu[]          = { SCRIPTS "pass_manager", NULL };
 static const char *record_screen[]     = { SCRIPTS "record_screen", NULL};
 
@@ -68,7 +63,6 @@ static const char *call_bluetooth[]    = { SCRIPTS "bluetooth_call", NULL };
 static const char *bluetooth_connect[] = { SCRIPTS "bluetooth_connect", NULL };
 static const char *rfkill[]            = { SCRIPTS "rfkill", NULL };
 
-static const char *connect_server[]    = { SCRIPTS "connect_server", NULL };
 
 static const char *mount_drive[]       = { SCRIPTS "mount_drives", NULL };
 static const char *unmount_drive[]     = { SCRIPTS "unmount_drives", NULL };
@@ -89,58 +83,51 @@ static const char *next_song[]         = { SCRIPTS "play_music", "next", NULL  }
 static const char *prev_song[]         = { SCRIPTS "play_music", "previous", NULL  };
 
 static Key keys[] = {
-	{ ALT,           XK_p,      spawn,          {.v = dmenucmd } },
+	{ META,           XK_space,  spawn,          {.v = dmenucmd } },
 
-	{ ALT,           XK_r,      spawn,          {.v = htop } },
-	{ ALT,           XK_m,      spawn,          {.v = neomutt} },
-	{ ALT,           XK_Return, spawn,          {.v = termcmd } },
-	{ ALT,           XK_v,      spawn,          {.v = sfm } },
-	{ ALT,           XK_w,      spawn,          {.v = passmenu} },
-	{ ALT,           XK_o,      spawn,          {.v = record_screen } },
-	{ ALT,           XK_f,      spawn,          {.v = surf } },
-	{ ALT,           XK_backslash,      spawn,          {.v = search } },
+	{ META,           XK_Return, spawn,          {.v = termcmd } },
+	{ META,           XK_p,      spawn,          {.v = passmenu} },
+	{ META,           XK_F2,     spawn,          {.v = record_screen } },
 
-	{ ALT|META,      XK_g,      spawn,          {.v = call_bluetooth } },
-	{ ALT|SHIFT,     XK_g,      spawn,          {.v = bluetooth_connect } },
-	{ ALT|META,      XK_k,      spawn,          {.v = rfkill } },
+	{ META|ALT,       XK_g,      spawn,          {.v = call_bluetooth } },
+	{ META|SHIFT,     XK_g,      spawn,          {.v = bluetooth_connect } },
+	{ META|ALT,       XK_k,      spawn,          {.v = rfkill } },
 
-	{ ALT,           XK_g,      spawn,          {.v = connect_server} },
+	{ META,           XK_t,      spawn,          {.v = mount_drive } },
+	{ META,           XK_s,      spawn,          {.v = unmount_drive } },
 
-	{ ALT,           XK_t,      spawn,          {.v = mount_drive } },
-	{ ALT,           XK_s,      spawn,          {.v = unmount_drive } },
+	{ META|ALT,       XK_a,      spawn,          {.v = notify_azan} },
+	{ META|ALT,       XK_c,      spawn,          {.v = notify_cpu} },
+	{ META|ALT,       XK_d,      spawn,          {.v = notify_disks} },
+	{ META|ALT,       XK_x,      spawn,          {.v = notify_gpu} },
+	{ META|ALT,       XK_z,      spawn,          {.v = notify_network} },
 
-	{ ALT|META,      XK_a,      spawn,          {.v = notify_azan} },
-	{ ALT|META,      XK_c,      spawn,          {.v = notify_cpu} },
-	{ ALT|META,      XK_d,      spawn,          {.v = notify_disks} },
-	{ ALT|META,      XK_x,      spawn,          {.v = notify_gpu} },
-	{ ALT|META,      XK_z,      spawn,          {.v = notify_network} },
+	{ META,           XK_F10,    spawn,          {.v = mute} },
+	{ META,           XK_F12,    spawn,          {.v = volume_down} },
+	{ META,           XK_F11,    spawn,          {.v = volume_up} },
 
-	{ ALT,           XK_F10,    spawn,          {.v = mute} },
-	{ ALT,           XK_F12,    spawn,          {.v = volume_down} },
-	{ ALT,           XK_F11,    spawn,          {.v = volume_up} },
+	{ META|ALT,       XK_p,      spawn,          {.v = play_music } },
+	{ META,           XK_F7,     spawn,          {.v = play_pause } },
+	{ META,           XK_F9,     spawn,          {.v = next_song} },
+	{ META,           XK_F8,     spawn,          {.v = prev_song} },
 
-	{ ALT|META,      XK_p,      spawn,          {.v = play_music } },
-	{ ALT,           XK_F7,     spawn,          {.v = play_pause } },
-	{ ALT,           XK_F9,     spawn,          {.v = next_song} },
-	{ ALT,           XK_F8,     spawn,          {.v = prev_song} },
-
-	{ ALT|META,      XK_l,      spawn,          SHCMD("pkill gpg-agent; slock") },
-	{ ALT|META,      XK_e,      spawn,          SHCMD("notify-send 'Email' 'mbsync -a' && mbsync -a") },
-	{ ALT,           XK_Tab,    view,           {0} },
-	{ ALT,           XK_b,      togglebar,      {0} },
-	{ ALT,           XK_q,      killclient,     {0} },
-	{ ALT,           XK_j,      focusstack,     {.i = +1 } },
-	{ ALT,           XK_k,      focusstack,     {.i = -1 } },
-	{ ALT,           XK_h,      setmfact,       {.f = -0.01} },
-	{ ALT,           XK_l,      setmfact,       {.f = +0.01} },
-	{ ALT,           XK_comma,  focusmon,       {.i = -1 } },
-	{ ALT,           XK_period, focusmon,       {.i = +1 } },
-	{ ALT|SHIFT,     XK_period, tagmon,         {.i = +1 } },
-	{ ALT|SHIFT,     XK_comma,  tagmon,         {.i = -1 } },
-	//{ ALT|SHIFT,             XK_j,      movestack,      {.i = +1 } },
-	//{ ALT|SHIFT,             XK_k,      movestack,      {.i = -1 } },
-	{ ALT|SHIFT,     XK_Return, zoom,           {0} },
-	{ ALT|SHIFT,     XK_q,      quit,           {0} },
+	{ META|ALT,       XK_l,      spawn,          SHCMD("pkill gpg-agent; slock") },
+	{ META|ALT,       XK_e,      spawn,          SHCMD("notify-send 'Email' 'mbsync -a' && mbsync -a") },
+	{ META,           XK_Tab,    view,           {0} },
+	{ META,           XK_b,      togglebar,      {0} },
+	{ META,           XK_q,      killclient,     {0} },
+	{ META|SHIFT,     XK_j,      focusstack,     {.i = +1 } },
+	{ META|SHIFT,     XK_k,      focusstack,     {.i = -1 } },
+	{ META,           XK_h,      setmfact,       {.f = -0.01} },
+	{ META,           XK_l,      setmfact,       {.f = +0.01} },
+	{ META,           XK_comma,  focusmon,       {.i = -1 } },
+	{ META,           XK_period, focusmon,       {.i = +1 } },
+	{ META|SHIFT,     XK_period, tagmon,         {.i = +1 } },
+	{ META|SHIFT,     XK_comma,  tagmon,         {.i = -1 } },
+	//{ META|SHIFT,             XK_j,      movestack,      {.i = +1 } },
+	//{ META|SHIFT,             XK_k,      movestack,      {.i = -1 } },
+	{ META|SHIFT,     XK_Return, zoom,           {0} },
+	{ META|SHIFT,     XK_q,      quit,           {0} },
 	TAGKEYS(         XK_1,                       0)
 	TAGKEYS(         XK_2,                       1)
 	TAGKEYS(         XK_3,                       2)
@@ -160,11 +147,11 @@ static Button buttons[] = {
 	{ ClkLtSymbol,   0,         Button3, setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,   0,         Button2, zoom,           {0} },
 	{ ClkStatusText, 0,         Button2, spawn,          {.v = termcmd } },
-	{ ClkClientWin,  ALT,       Button1, movemouse,      {0} },
-	{ ClkClientWin,  ALT,       Button2, togglefloating, {0} },
-	{ ClkClientWin,  ALT,       Button3, resizemouse,    {0} },
+	{ ClkClientWin,  META,       Button1, movemouse,      {0} },
+	{ ClkClientWin,  META,       Button2, togglefloating, {0} },
+	{ ClkClientWin,  META,       Button3, resizemouse,    {0} },
 	{ ClkTagBar,     0,         Button1, view,           {0} },
 	{ ClkTagBar,     0,         Button3, toggleview,     {0} },
-	{ ClkTagBar,     ALT,       Button1, tag,            {0} },
-	{ ClkTagBar,     ALT,       Button3, toggletag,      {0} },
+	{ ClkTagBar,     META,       Button1, tag,            {0} },
+	{ ClkTagBar,     META,       Button3, toggletag,      {0} },
 };
