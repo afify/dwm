@@ -50,19 +50,17 @@ static const Layout layouts[] = { { "", tile } };
 	{ META|SHIFT,     KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ META|CTL|SHIFT, KEY,      toggletag,      {.ui = 1 << TAG} },
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define SCRIPTS "/home/hassan/.scripts/"
+#define SCRIPTS "/home/hassan/.scripts/executables/"
 
 /* commands */
 static char dmenumon[2] = "0";
 static const char *dmenucmd[]          = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *termcmd[]           = { "st", NULL };
 static const char *passmenu[]          = { SCRIPTS "pass_manager", NULL };
-static const char *record_screen[]     = { SCRIPTS "record_screen", NULL};
 
 static const char *call_bluetooth[]    = { SCRIPTS "bluetooth_call", NULL };
 static const char *bluetooth_connect[] = { SCRIPTS "bluetooth_connect", NULL };
 static const char *rfkill[]            = { SCRIPTS "rfkill", NULL };
-
 
 static const char *mount_drive[]       = { SCRIPTS "mount_drives", NULL };
 static const char *unmount_drive[]     = { SCRIPTS "unmount_drives", NULL };
@@ -82,19 +80,21 @@ static const char *play_pause[]        = { SCRIPTS "play_music", "play-pause", N
 static const char *next_song[]         = { SCRIPTS "play_music", "next", NULL  };
 static const char *prev_song[]         = { SCRIPTS "play_music", "previous", NULL  };
 
+static const char *screenrecord[]      = { SCRIPTS "record_screen", NULL};
+static const char *screenshot[]        = { "scrot", "-s", NULL };
+
 static Key keys[] = {
 	{ META,           XK_space,  spawn,          {.v = dmenucmd } },
 
 	{ META,           XK_Return, spawn,          {.v = termcmd } },
 	{ META,           XK_p,      spawn,          {.v = passmenu} },
-	{ META,           XK_F2,     spawn,          {.v = record_screen } },
 
 	{ META|ALT,       XK_g,      spawn,          {.v = call_bluetooth } },
 	{ META|SHIFT,     XK_g,      spawn,          {.v = bluetooth_connect } },
 	{ META|ALT,       XK_k,      spawn,          {.v = rfkill } },
 
-	{ META,           XK_t,      spawn,          {.v = mount_drive } },
-	{ META,           XK_s,      spawn,          {.v = unmount_drive } },
+	{ META,           XK_F3,     spawn,          {.v = mount_drive } },
+	{ META,           XK_F4,     spawn,          {.v = unmount_drive } },
 
 	{ META|ALT,       XK_a,      spawn,          {.v = notify_azan} },
 	{ META|ALT,       XK_c,      spawn,          {.v = notify_cpu} },
@@ -111,6 +111,9 @@ static Key keys[] = {
 	{ META,           XK_F9,     spawn,          {.v = next_song} },
 	{ META,           XK_F8,     spawn,          {.v = prev_song} },
 
+	{ META,           XK_F1,     spawn,          {.v = screenshot} },
+	{ META,           XK_F2,     spawn,          {.v = screenrecord} },
+
 	{ META|ALT,       XK_l,      spawn,          SHCMD("pkill gpg-agent; slock") },
 	{ META|ALT,       XK_e,      spawn,          SHCMD("notify-send 'Email' 'mbsync -a' && mbsync -a") },
 	{ META,           XK_Tab,    view,           {0} },
@@ -124,19 +127,17 @@ static Key keys[] = {
 	{ META,           XK_period, focusmon,       {.i = +1 } },
 	{ META|SHIFT,     XK_period, tagmon,         {.i = +1 } },
 	{ META|SHIFT,     XK_comma,  tagmon,         {.i = -1 } },
-	//{ META|SHIFT,             XK_j,      movestack,      {.i = +1 } },
-	//{ META|SHIFT,             XK_k,      movestack,      {.i = -1 } },
 	{ META|SHIFT,     XK_Return, zoom,           {0} },
 	{ META|SHIFT,     XK_q,      quit,           {0} },
-	TAGKEYS(         XK_1,                       0)
-	TAGKEYS(         XK_2,                       1)
-	TAGKEYS(         XK_3,                       2)
-	TAGKEYS(         XK_4,                       3)
-	TAGKEYS(         XK_5,                       4)
-	TAGKEYS(         XK_6,                       5)
-	TAGKEYS(         XK_7,                       6)
-	TAGKEYS(         XK_8,                       7)
-	TAGKEYS(         XK_9,                       8)
+	TAGKEYS(          XK_1,                       0)
+	TAGKEYS(          XK_2,                       1)
+	TAGKEYS(          XK_3,                       2)
+	TAGKEYS(          XK_4,                       3)
+	TAGKEYS(          XK_5,                       4)
+	TAGKEYS(          XK_6,                       5)
+	TAGKEYS(          XK_7,                       6)
+	TAGKEYS(          XK_8,                       7)
+	TAGKEYS(          XK_9,                       8)
 };
 
 /* button definitions */
