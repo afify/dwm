@@ -50,7 +50,7 @@ static const Layout layouts[] = { { "", tile } };
 	{ META|SHIFT,     KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ META|CTL|SHIFT, KEY,      toggletag,      {.ui = 1 << TAG} },
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define SCRIPTS "/home/hassan/.scripts/executables/"
+#define SCRIPTS "/home/hassan/.scripts/exec/"
 
 /* commands */
 static char dmenumon[2] = "0";
@@ -87,14 +87,14 @@ static Key keys[] = {
 	{ META,           XK_space,  spawn,          {.v = dmenucmd } },
 
 	{ META,           XK_Return, spawn,          {.v = termcmd } },
-	{ META,           XK_p,      spawn,          {.v = passmenu} },
+	{ META,           XK_F3,     spawn,          {.v = passmenu} },
 
 	{ META|ALT,       XK_g,      spawn,          {.v = call_bluetooth } },
 	{ META|SHIFT,     XK_g,      spawn,          {.v = bluetooth_connect } },
 	{ META|ALT,       XK_k,      spawn,          {.v = rfkill } },
 
-	{ META,           XK_F3,     spawn,          {.v = mount_drive } },
-	{ META,           XK_F4,     spawn,          {.v = unmount_drive } },
+	{ META,           XK_F4,     spawn,          {.v = mount_drive } },
+	{ META,           XK_F5,     spawn,          {.v = unmount_drive } },
 
 	{ META|ALT,       XK_a,      spawn,          {.v = notify_azan} },
 	{ META|ALT,       XK_c,      spawn,          {.v = notify_cpu} },
