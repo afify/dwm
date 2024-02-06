@@ -5,8 +5,8 @@ static const unsigned int borderpx  = 0;
 static const unsigned int snap      = 32;
 static const int showbar            = 0;
 static const int topbar             = 1;
-static const char *fonts[]          = { "Martian Mono Std Rg:pixelsize=16" };
-static const char dmenufont[]       =   "Martian Mono Std Rg:pixelsize=16";
+static const char *fonts[]          = { "Martian Mono:pixelsize=16" };
+static const char dmenufont[]       =   "Martian Mono:pixelsize=16";
 static const char col_black[]       = "#000000";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -58,7 +58,7 @@ static const char *dmenucmd[]          = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *termcmd[]           = { "st", NULL };
 static const char *passmenu[]          = { SCRIPTS "pass_manager", NULL };
 
-static const char *call_bluetooth[]    = { SCRIPTS "bluetooth_call", NULL };
+static const char *gpg[]               = { SCRIPTS "gpg", NULL };
 static const char *bluetooth_connect[] = { SCRIPTS "bluetooth_connect", NULL };
 static const char *rfkill[]            = { SCRIPTS "rfkill", NULL };
 
@@ -70,6 +70,7 @@ static const char *notify_cpu[]        = { SCRIPTS "notify_cpu", NULL };
 static const char *notify_disks[]      = { SCRIPTS "notify_disks", NULL };
 static const char *notify_gpu[]        = { SCRIPTS "notify_gpu", NULL };
 static const char *notify_network[]    = { SCRIPTS "network", "notify", NULL };
+static const char *notify_myip[]    = { SCRIPTS "myip", NULL };
 
 static const char *mute[]              = { SCRIPTS "volume_control", "mute_t", NULL };
 static const char *volume_down[]       = { SCRIPTS "volume_control", "dec", NULL };
@@ -89,7 +90,7 @@ static Key keys[] = {
 	{ META,           XK_Return, spawn,          {.v = termcmd } },
 	{ META,           XK_F3,     spawn,          {.v = passmenu} },
 
-	{ META|ALT,       XK_g,      spawn,          {.v = call_bluetooth } },
+	{ META,           XK_g,      spawn,          {.v = gpg } },
 	{ META|SHIFT,     XK_g,      spawn,          {.v = bluetooth_connect } },
 	{ META|ALT,       XK_k,      spawn,          {.v = rfkill } },
 
@@ -101,6 +102,7 @@ static Key keys[] = {
 	{ META|ALT,       XK_d,      spawn,          {.v = notify_disks} },
 	{ META|ALT,       XK_x,      spawn,          {.v = notify_gpu} },
 	{ META|ALT,       XK_z,      spawn,          {.v = notify_network} },
+	{ META|ALT,       XK_i,      spawn,          {.v = notify_myip} },
 
 	{ META,           XK_F10,    spawn,          {.v = mute} },
 	{ META,           XK_F12,    spawn,          {.v = volume_down} },
@@ -148,11 +150,11 @@ static Button buttons[] = {
 	{ ClkLtSymbol,   0,         Button3, setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,   0,         Button2, zoom,           {0} },
 	{ ClkStatusText, 0,         Button2, spawn,          {.v = termcmd } },
-	{ ClkClientWin,  META,       Button1, movemouse,      {0} },
-	{ ClkClientWin,  META,       Button2, togglefloating, {0} },
-	{ ClkClientWin,  META,       Button3, resizemouse,    {0} },
+	{ ClkClientWin,  META,      Button1, movemouse,      {0} },
+	{ ClkClientWin,  META,      Button2, togglefloating, {0} },
+	{ ClkClientWin,  META,      Button3, resizemouse,    {0} },
 	{ ClkTagBar,     0,         Button1, view,           {0} },
 	{ ClkTagBar,     0,         Button3, toggleview,     {0} },
-	{ ClkTagBar,     META,       Button1, tag,            {0} },
-	{ ClkTagBar,     META,       Button3, toggletag,      {0} },
+	{ ClkTagBar,     META,      Button1, tag,            {0} },
+	{ ClkTagBar,     META,      Button3, toggletag,      {0} },
 };
