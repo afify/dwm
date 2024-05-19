@@ -5,8 +5,8 @@ static const unsigned int borderpx  = 0;
 static const unsigned int snap      = 32;
 static const int showbar            = 0;
 static const int topbar             = 1;
-static const char *fonts[]          = { "Martian Mono:pixelsize=16" };
-static const char dmenufont[]       =   "Martian Mono:pixelsize=16";
+static const char *fonts[]          = { "monospace:pixelsize=16" };
+static const char dmenufont[]       =   "monospace:pixelsize=16";
 static const char col_black[]       = "#000000";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -29,6 +29,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "dbeaver",  NULL,       NULL,       1 << 7,       0,           -1 },
 };
 
 /* layout(s) */
@@ -82,7 +83,6 @@ static const char *next_song[]         = { SCRIPTS "play_music", "next", NULL  }
 static const char *prev_song[]         = { SCRIPTS "play_music", "previous", NULL  };
 
 static const char *screenrecord[]      = { SCRIPTS "record_screen", NULL};
-static const char *screenshot[]        = { "scrot", "-s", NULL };
 
 static Key keys[] = {
 	{ META,           XK_space,  spawn,          {.v = dmenucmd } },
@@ -113,7 +113,7 @@ static Key keys[] = {
 	{ META,           XK_F9,     spawn,          {.v = next_song} },
 	{ META,           XK_F8,     spawn,          {.v = prev_song} },
 
-	{ META,           XK_F1,     spawn,          {.v = screenshot} },
+	{ META,           XK_F1,     spawn,          SHCMD("scrot -s '%Y_%m_\%d_%H%M\%S_$wx$h.png'")},
 	{ META,           XK_F2,     spawn,          {.v = screenrecord} },
 
 	{ META|ALT,       XK_l,      spawn,          SHCMD("pkill gpg-agent; slock") },
