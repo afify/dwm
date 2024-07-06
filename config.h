@@ -5,8 +5,8 @@ static const unsigned int borderpx  = 0;
 static const unsigned int snap      = 32;
 static const int showbar            = 0;
 static const int topbar             = 1;
-static const char *fonts[]          = { "monospace:pixelsize=16" };
-static const char dmenufont[]       =   "monospace:pixelsize=16";
+static const char *fonts[]          = { "MartianMonoNerdFont:pixelsize=16" };
+static const char dmenufont[]       =   "MartianMonoNerdFont:pixelsize=16";
 static const char col_black[]       = "#000000";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -56,10 +56,11 @@ static const Layout layouts[] = { { "", tile } };
 /* commands */
 static char dmenumon[2] = "0";
 static const char *dmenucmd[]          = { "dmenu_run", "-m", dmenumon, NULL };
-static const char *termcmd[]           = { "st", NULL };
+static const char *termcmd[]           = { "alacritty", NULL };
 static const char *passmenu[]          = { SCRIPTS "pass_manager", NULL };
 
 static const char *gpg[]               = { SCRIPTS "gpg", NULL };
+static const char *vm_manager[]        = { SCRIPTS "vm_manager", NULL };
 static const char *bluetooth_connect[] = { SCRIPTS "bluetooth_connect", NULL };
 static const char *rfkill[]            = { SCRIPTS "rfkill", NULL };
 
@@ -71,7 +72,7 @@ static const char *notify_cpu[]        = { SCRIPTS "notify_cpu", NULL };
 static const char *notify_disks[]      = { SCRIPTS "notify_disks", NULL };
 static const char *notify_gpu[]        = { SCRIPTS "notify_gpu", NULL };
 static const char *notify_network[]    = { SCRIPTS "network", "notify", NULL };
-static const char *notify_myip[]    = { SCRIPTS "myip", NULL };
+static const char *notify_myip[]       = { SCRIPTS "myip", NULL };
 
 static const char *mute[]              = { SCRIPTS "volume_control", "mute_t", NULL };
 static const char *volume_down[]       = { SCRIPTS "volume_control", "dec", NULL };
@@ -91,6 +92,7 @@ static Key keys[] = {
 	{ META,           XK_F3,     spawn,          {.v = passmenu} },
 
 	{ META,           XK_g,      spawn,          {.v = gpg } },
+	{ META,           XK_d,      spawn,          {.v = vm_manager } },
 	{ META|SHIFT,     XK_g,      spawn,          {.v = bluetooth_connect } },
 	{ META|ALT,       XK_k,      spawn,          {.v = rfkill } },
 
