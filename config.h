@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 0;
@@ -106,9 +107,9 @@ static Key keys[] = {
 	{ META|ALT,       XK_z,      spawn,          {.v = notify_network} },
 	{ META|ALT,       XK_i,      spawn,          {.v = notify_myip} },
 
-	{ META,           XK_F10,    spawn,          {.v = mute} },
-	{ META,           XK_F12,    spawn,          {.v = volume_down} },
-	{ META,           XK_F11,    spawn,          {.v = volume_up} },
+	{ 0,              XF86XK_AudioLowerVolume, spawn, {.v = volume_down } },
+	{ 0,              XF86XK_AudioRaiseVolume, spawn, {.v = volume_up   } },
+	{ 0,              XF86XK_AudioMute,        spawn, {.v = mute } },
 
 	{ META|ALT,       XK_p,      spawn,          {.v = play_music } },
 	{ META,           XK_F7,     spawn,          {.v = play_pause } },
